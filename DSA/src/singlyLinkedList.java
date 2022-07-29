@@ -1,6 +1,8 @@
 
 public class singlyLinkedList {
 
+	// definition of singly linked list
+	
 	private listNode head;
 
 	private static class listNode
@@ -16,6 +18,8 @@ public class singlyLinkedList {
 
 	}
 
+	// display elements of linked list in order
+	
 	public void display() {
 
 		listNode current = head ;
@@ -27,7 +31,10 @@ public class singlyLinkedList {
 		System.out.print("null\n");
 	}
 
+	// find length of linked list
+	
 	public int length() {
+		
 		listNode current = head;
 		int count =0;
 		while(current !=null)
@@ -37,14 +44,42 @@ public class singlyLinkedList {
 		}
 		return count;
 	}
-
+	
+	// insert at beginning of linked list
+	
 	public void insertFirst(int value)
 	{
 		listNode newnode = new listNode(value);
 		newnode.next = head;
 		head = newnode;
 	}
+	
+	// insert at end of linked list
+	
+	public void insertEnd(int value) {
+		
+		listNode newnode = new listNode(value);
+		listNode current = head;
 
+
+		if(head==null)
+		{
+			head = newnode;
+		}
+		else
+		{
+
+			while(current.next!=null)
+			{
+				current = current.next;
+
+			}
+			current.next = newnode;
+		}
+	}
+
+	// insert new node at a given position. Position indexing starts from 1 
+	
 	public void insertPos(int position, int value)
 	{
 		listNode newnode = new listNode(value);
@@ -70,26 +105,7 @@ public class singlyLinkedList {
 		}
 	}
 
-	public void insertEnd(int value) {
-		listNode newnode = new listNode(value);
-		listNode current = head;
-
-
-		if(head==null)
-		{
-			head = newnode;
-		}
-		else
-		{
-
-			while(current.next!=null)
-			{
-				current = current.next;
-
-			}
-			current.next = newnode;
-		}
-	}
+	
 
 	public listNode deleteFirst() {
 
