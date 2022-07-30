@@ -3,7 +3,7 @@ package Lists;
 public class singlyLinkedList {
 
 	// definition of singly linked list
-	
+
 	private listNode head;
 
 	private static class listNode
@@ -20,7 +20,7 @@ public class singlyLinkedList {
 	}
 
 	// display elements of linked list in order
-	
+
 	public void display() {
 
 		listNode current = head ;
@@ -33,9 +33,9 @@ public class singlyLinkedList {
 	}
 
 	// find length of linked list
-	
+
 	public int length() {
-		
+
 		listNode current = head;
 		int count =0;
 		while(current !=null)
@@ -45,20 +45,20 @@ public class singlyLinkedList {
 		}
 		return count;
 	}
-	
+
 	// insert at beginning of linked list
-	
+
 	public void insertFirst(int value)
 	{
 		listNode newnode = new listNode(value);
 		newnode.next = head;
 		head = newnode;
 	}
-	
+
 	// insert at end of linked list
-	
+
 	public void insertEnd(int value) {
-		
+
 		listNode newnode = new listNode(value);
 		listNode current = head;
 
@@ -80,7 +80,7 @@ public class singlyLinkedList {
 	}
 
 	//insert new node at a given position. Position indexing values from (1 till length+1), error on length+2
-	
+
 	public void insertPos(int position, int value)
 	{
 		listNode newnode = new listNode(value);
@@ -92,7 +92,7 @@ public class singlyLinkedList {
 		else
 		{
 			listNode previous =  head;
-			
+
 			int count = 1; //keeping track of current node
 
 			while(count < position -1) // iterate to node after which we need to insert
@@ -108,7 +108,7 @@ public class singlyLinkedList {
 	}
 
 	// delete from beginning of linked list
-	
+
 	public listNode deleteFirst() {
 
 		if(head == null)  // no element in list
@@ -121,7 +121,7 @@ public class singlyLinkedList {
 			return temp;
 		}
 	}
-	
+
 	// delete from end of linked list
 
 	public listNode deleteLast() {
@@ -151,9 +151,9 @@ public class singlyLinkedList {
 			return current;
 		}
 	}
-	
+
 	// delete node at a given position.Indexing from 1 till length
-    // error at index length +1
+	// error at index length +1
 	public void deletePos(int position)
 	{
 		if(position==1)
@@ -189,9 +189,9 @@ public class singlyLinkedList {
 
 		return false;
 	}
-	
+
 	// reverse a singly linked list using 3 refs - previous, current and next
-	
+
 	public listNode reverse(listNode head)
 	{
 		if(head==null || head.next == null) // 0 or 1 node in list then return head
@@ -211,10 +211,10 @@ public class singlyLinkedList {
 
 		return previous;
 	}
-	
+
 	// find middle node in linked list
 	// slow pointer moves by 1 and fast pointer by 2
-	
+
 	public listNode findMiddle() {
 
 		listNode slowPtr = head;
@@ -227,7 +227,7 @@ public class singlyLinkedList {
 		}
 		return slowPtr;
 	}
-	
+
 	// return nth node from end of linked list
 	// take two pointer - main pointer and ref pointer
 	// increase ref pointer by value of n, then increment ref &  main ptr till  ref is null
@@ -256,10 +256,10 @@ public class singlyLinkedList {
 
 		return mainPtr;
 	}
-	
+
 	// linked list is sorted
 	// just compare current with next node value to check for duplicates
-	
+
 	public void removeDuplicateFromSorted() {
 
 		if(head == null)
@@ -280,7 +280,7 @@ public class singlyLinkedList {
 		}
 
 	}
-	
+
 	// insert node in sorted list
 
 	public void insertedInSortedList(int value) {
@@ -304,10 +304,12 @@ public class singlyLinkedList {
 		newNode.next = current;
 		temp.next = newNode;
 	}
-	
-	// fast pointer and slow pointer will coincide 
+
+	//Floyd’s cycle finding algorithm or Hare-Tortoise algorithm 
+	// fast pointer and slow pointer will coincide if loop exists
 
 	public boolean containsLoop() {
+
 		listNode fastPtr = head;
 		listNode slowPtr = head;
 
@@ -322,6 +324,71 @@ public class singlyLinkedList {
 		return false;
 	}
 
+	// find starting node of loop inside linked list 
+
+	public listNode startNodeInListLoop()
+	{
+		listNode slowPtr = head;
+		listNode fastPtr = head;
+
+		while(fastPtr !=null && fastPtr.next != null)
+		{
+			fastPtr = fastPtr.next.next;
+			slowPtr = slowPtr.next;
+
+			if(fastPtr == slowPtr) {
+				break;
+			}
+		}	
+		if(fastPtr==null || fastPtr.next==null)
+			return new listNode(0);
+		else
+		{
+			slowPtr = head;
+
+			while(slowPtr != fastPtr)
+			{
+				slowPtr = slowPtr.next;
+				fastPtr = fastPtr.next;
+			}
+		}
+
+		return slowPtr;
+	}
+
+
+	// Remove loop present inside linked list
+
+	public void removeListLoop()
+	{
+		listNode slowPtr = head;
+		listNode fastPtr = head;
+
+		while(fastPtr !=null && fastPtr.next != null)
+		{
+			fastPtr = fastPtr.next.next;
+			slowPtr = slowPtr.next;
+
+			if(fastPtr == slowPtr) {
+				break;
+			}
+		}	
+		if(fastPtr!=null || fastPtr.next!=null)
+		{
+			slowPtr = head;
+
+			while(slowPtr.next != fastPtr.next)
+			{
+				slowPtr = slowPtr.next;
+				fastPtr = fastPtr.next;
+			}
+			fastPtr.next = null;
+		}
+
+	}
+
+
+
 
 
 	public static void main(String [] args)
@@ -329,13 +396,14 @@ public class singlyLinkedList {
 		//System.out.print("Hola");
 
 		singlyLinkedList sl = new singlyLinkedList();
-//		sl.head = new listNode(1);
-//		listNode second = new listNode(5);
-//		listNode third = new listNode(9);
-//		listNode fourth = new listNode(11);
-//		sl.head.next = second;
-//		second.next = third;
-//		third.next = fourth;
+
+		//		sl.head = new listNode(1);
+		//		listNode second = new listNode(5);
+		//		listNode third = new listNode(9);
+		//		listNode fourth = new listNode(11);
+		//		sl.head.next = second;
+		//		second.next = third;
+		//		third.next = fourth;
 
 
 
@@ -350,28 +418,43 @@ public class singlyLinkedList {
 
 		sl.insertPos(1, 1);
 
-		sl.display();
-
 		sl.insertedInSortedList(25);
 		sl.display();
 
-//		sl.removeDuplicateFromSorted();
-//		sl.display();
 
-//		sl.deleteFirst();
-//
-//		sl.display();
-//
-//		sl.deletePos(3);
-//		sl.display();
-//		System.out.println(sl.find(10));
-//
-//		sl.head = sl.reverse(sl.head);
-//
-//		sl.display();
-//		System.out.println(sl.findMiddle().data);
-//
-//		System.out.println(sl.getNthNodeFromEnd(3).data);
+		// creating a loop
+
+		listNode temp = sl.head;
+				while(temp.next!=null)
+					temp = temp.next;
+				
+				temp.next = sl.head.next.next.next.next; 
+
+		temp = sl.startNodeInListLoop();
+		System.out.println(temp.data);
+		
+		sl.removeListLoop();
+		
+		sl.display();
+
+
+		//		sl.removeDuplicateFromSorted();
+		//		sl.display();
+
+		//		sl.deleteFirst();
+		//
+		//		sl.display();
+		//
+		//		sl.deletePos(3);
+		//		sl.display();
+		//		System.out.println(sl.find(10));
+		//
+		//		sl.head = sl.reverse(sl.head);
+		//
+		//		sl.display();
+		//		System.out.println(sl.findMiddle().data);
+		//
+		//		System.out.println(sl.getNthNodeFromEnd(3).data);
 
 
 
