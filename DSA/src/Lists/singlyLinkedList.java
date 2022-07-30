@@ -194,7 +194,7 @@ public class singlyLinkedList {
 	
 	public listNode reverse(listNode head)
 	{
-		if(head==null)
+		if(head==null || head.next == null) // 0 or 1 node in list then return head
 			return head;
 
 		listNode current = head ;
@@ -211,7 +211,10 @@ public class singlyLinkedList {
 
 		return previous;
 	}
-
+	
+	// find middle node in linked list
+	// slow pointer moves by 1 and fast pointer by 2
+	
 	public listNode findMiddle() {
 
 		listNode slowPtr = head;
@@ -224,6 +227,10 @@ public class singlyLinkedList {
 		}
 		return slowPtr;
 	}
+	
+	// return nth node from end of linked list
+	// take two pointer - main pointer and ref pointer
+	// increase ref pointer by value of n, then increment ref &  main ptr till  ref is null
 
 	public listNode getNthNodeFromEnd(int n) {
 
@@ -249,7 +256,10 @@ public class singlyLinkedList {
 
 		return mainPtr;
 	}
-
+	
+	// linked list is sorted
+	// just compare current with next node value to check for duplicates
+	
 	public void removeDuplicateFromSorted() {
 
 		if(head == null)
@@ -270,6 +280,8 @@ public class singlyLinkedList {
 		}
 
 	}
+	
+	// insert node in sorted list
 
 	public void insertedInSortedList(int value) {
 
@@ -292,6 +304,8 @@ public class singlyLinkedList {
 		newNode.next = current;
 		temp.next = newNode;
 	}
+	
+	// fast pointer and slow pointer will coincide 
 
 	public boolean containsLoop() {
 		listNode fastPtr = head;
