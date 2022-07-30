@@ -1,3 +1,4 @@
+package Lists;
 
 public class singlyLinkedList {
 
@@ -78,7 +79,7 @@ public class singlyLinkedList {
 		}
 	}
 
-	// insert new node at a given position. Position indexing starts from 1 
+	//insert new node at a given position. Position indexing values from (1 till length+1), error on length+2
 	
 	public void insertPos(int position, int value)
 	{
@@ -91,9 +92,10 @@ public class singlyLinkedList {
 		else
 		{
 			listNode previous =  head;
-			int count = 1;
+			
+			int count = 1; //keeping track of current node
 
-			while(count < position -1)
+			while(count < position -1) // iterate to node after which we need to insert
 			{
 				previous = previous.next;
 				count++;
@@ -105,8 +107,8 @@ public class singlyLinkedList {
 		}
 	}
 
+	// delete from beginning of linked list
 	
-
 	public listNode deleteFirst() {
 
 		if(head == null)  // no element in list
@@ -115,10 +117,12 @@ public class singlyLinkedList {
 		{
 			listNode temp = head;
 			head = head.next;
-			temp.next = null;
+			temp.next = null; // remove link to next node
 			return temp;
 		}
 	}
+	
+	// delete from end of linked list
 
 	public listNode deleteLast() {
 
@@ -147,7 +151,9 @@ public class singlyLinkedList {
 			return current;
 		}
 	}
-
+	
+	// delete node at a given position.Indexing from 1 till length
+    // error at index length +1
 	public void deletePos(int position)
 	{
 		if(position==1)
@@ -183,7 +189,9 @@ public class singlyLinkedList {
 
 		return false;
 	}
-
+	
+	// reverse a singly linked list using 3 refs - previous, current and next
+	
 	public listNode reverse(listNode head)
 	{
 		if(head==null)
