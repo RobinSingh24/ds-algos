@@ -393,21 +393,8 @@ public class singlyLinkedList {
 
 	public static void main(String [] args)
 	{
-		//System.out.print("Hola");
-
+		
 		singlyLinkedList sl = new singlyLinkedList();
-
-		//		sl.head = new listNode(1);
-		//		listNode second = new listNode(5);
-		//		listNode third = new listNode(9);
-		//		listNode fourth = new listNode(11);
-		//		sl.head.next = second;
-		//		second.next = third;
-		//		third.next = fourth;
-
-
-
-		//System.out.println(sl.length());
 
 		sl.insertFirst(2);
 		sl.insertFirst(2);
