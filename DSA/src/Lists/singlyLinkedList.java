@@ -278,7 +278,6 @@ public class singlyLinkedList {
 				current = current.next;
 			}
 		}
-
 	}
 
 	// insert node in sorted list
@@ -386,6 +385,36 @@ public class singlyLinkedList {
 		}
 
 	}
+	
+	// Merge two sorted linked list
+	
+	public listNode mergeSortedLists(listNode head1, listNode head2)
+	{
+		listNode dummy = new listNode(0);
+		listNode tail = dummy;
+		
+		while(head1!=null && head2!=null)
+		{
+			if(head1.data<=head2.data)
+			{
+				tail.next = head1;
+				head1 = head1.next;
+			}
+			else
+			{
+				tail.next = head2;
+				head2 = head2.next;
+			}
+			tail = tail.next;
+		}
+		if(head1==null)
+			tail.next = head2;
+		else
+			tail.next = head1;
+	
+	
+	return dummy.next;
+	}
 
 
 
@@ -395,34 +424,42 @@ public class singlyLinkedList {
 	{
 		
 		singlyLinkedList sl = new singlyLinkedList();
-
-		sl.insertFirst(2);
+		singlyLinkedList sl2 = new singlyLinkedList();
+		
 		sl.insertFirst(2);
 		sl.insertFirst(1);
 		sl.insertEnd(3);
-		sl.insertEnd(3);
 		sl.insertEnd(24);
-
 		sl.insertPos(1, 1);
-
 		sl.insertedInSortedList(25);
 		sl.display();
+		
+		sl2.insertFirst(4);
+		sl2.insertEnd(23);
+		sl2.insertEnd(27);
+		sl2.insertEnd(50);
+		sl2.display();
+		
+		// merge two sorted lists
+		
+//		listNode temp = sl.mergeSortedLists(sl.head, sl2.head);
+//		sl.head = temp;
+//		sl.display();
 
 
 		// creating a loop
 
-		listNode temp = sl.head;
-				while(temp.next!=null)
-					temp = temp.next;
-				
-				temp.next = sl.head.next.next.next.next; 
-
-		temp = sl.startNodeInListLoop();
-		System.out.println(temp.data);
-		
-		sl.removeListLoop();
-		
-		sl.display();
+//		listNode temp = sl.head;
+//				while(temp.next!=null)
+//					temp = temp.next;
+//				
+//				temp.next = sl.head.next.next.next.next; 
+//
+//		temp = sl.startNodeInListLoop();
+//		System.out.println(temp.data);
+//		
+//		sl.removeListLoop();
+	
 
 
 		//		sl.removeDuplicateFromSorted();
